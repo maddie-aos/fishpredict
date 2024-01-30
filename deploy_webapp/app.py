@@ -23,12 +23,32 @@ eval_pres = pd.read_csv('results/DNN_performance/DNN_eval.txt', sep='\t', header
 
 #globally loading models for the sake of effiency 
 #loading keras models: present
-cit_sor_model = load_model('saved_models/Citharichthys_sordidus.h5')
-eng_mor_model = load_model('saved_models/Engraulis_mordax.h5')
-par_cal_model = load_model('saved_models/Paralichthys_californicus.h5')
-sco_jap_model = load_model('saved_models/Paralichthys_californicus.h5')
-thu_ala_model = load_model('saved_models/Thunnus_alalunga.h5')
-xip_gla_model = load_model('saved_models/Xiphias_gladius.h5')
+
+with open('saved_models/Citharichthys_sordidus.pkl', 'rb') as file:
+    cit_sor_model = pickle.load(file)
+
+with open('saved_models/Engraulis_mordax.pkl', 'rb') as file:
+    eng_mor_model = pickle.load(file)
+
+with open('saved_models/Paralichthys_californicus.pkl', 'rb') as file:
+    par_cal_model = pickle.load(file)
+
+with open('saved_models/Scomber_japonicus.pkl', 'rb') as file:
+    sco_jap_model = pickle.load(file)
+
+with open('saved_models/Thunnus_alalunga.pkl', 'rb') as file:
+    thu_ala_model = pickle.load(file)
+
+with open('saved_models/Xiphias_gladius.pkl', 'rb') as file:
+    xip_gla_model = pickle.load(file)
+
+
+#cit_sor_model = load_model('saved_models/Citharichthys_sordidus.h5')
+#eng_mor_model = load_model('saved_models/Engraulis_mordax.h5')
+#par_cal_model = load_model('saved_models/Paralichthys_californicus.h5')
+#sco_jap_model = load_model('saved_models/Paralichthys_californicus.h5')
+#thu_ala_model = load_model('saved_models/Thunnus_alalunga.h5')
+#xip_gla_model = load_model('saved_models/Xiphias_gladius.h5')
 
 #Setting the main pages
 @app.route("/")
