@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
+    <h1 align = "center">Select Time Period<h1/>
+    <div class="button" style="display: block; margin-bottom: 0; margin-right: 20px;">
+        <div style="display: flex; justify-content: center; align-items: center; padding-top: 10px;">
+          <a href=present><button class=grey>Present</button></a>
+          <a href=future><button class=grey>Future</button></a>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2023 Madeline Smith. All rights reserved.</p>
+      </footer>
+</body>
+</html>
