@@ -334,7 +334,7 @@ def predict_emor():
             prediction_array=np.save('predictions/emor_prediction_array.npy',input_X)
             prediction_pandas=row_col.to_csv('predictions/emor_prediction_row_col.csv')
             
-            input_X=np.load('predictions/emor_prediction_array.npy')
+            input_X=np.load('deploy_webapp/predictions/emor_prediction_array.npy')
             df=pd.DataFrame(input_X)
             
             new_band=myarray[1].copy()
