@@ -43,16 +43,18 @@ with open('saved_models/Xiphias_gladius.pkl', 'rb') as file:
     xip_gla_model = pickle.load(file)
 
 
-
 #Setting the main pages
 @app.route("/")
 def index():
     return render_template('index.html')
 
-@app.route("/present")
+@app.route("/predict")
 def present():
-    return render_template("present.html")
+    return render_template("predict.html")
 
+@app.route("/dedication")
+def dedication():
+    return render_template("dedication.html")
 
 #Selecting Species in the Present
 @app.route("/cit_sor_pres")

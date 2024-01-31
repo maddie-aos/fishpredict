@@ -61,16 +61,15 @@ body {
     font-size: 12px;
     text-align: center;
 }
-
 .footer-content {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center; /* Added to center-align text content */
 }
 
 .footer-content img {
   max-width: 50%; /* Adjust the size as needed */
   margin-bottom: 10px;
 }
-
