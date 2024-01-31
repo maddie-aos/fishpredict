@@ -43,12 +43,6 @@ with open('saved_models/Xiphias_gladius.pkl', 'rb') as file:
     xip_gla_model = pickle.load(file)
 
 
-#cit_sor_model = load_model('saved_models/Citharichthys_sordidus.h5')
-#eng_mor_model = load_model('saved_models/Engraulis_mordax.h5')
-#par_cal_model = load_model('saved_models/Paralichthys_californicus.h5')
-#sco_jap_model = load_model('saved_models/Paralichthys_californicus.h5')
-#thu_ala_model = load_model('saved_models/Thunnus_alalunga.h5')
-#xip_gla_model = load_model('saved_models/Xiphias_gladius.h5')
 
 #Setting the main pages
 @app.route("/")
