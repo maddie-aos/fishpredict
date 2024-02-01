@@ -1,20 +1,27 @@
 // Import necessary dependencies
 import React from 'react';
-import { Routes, Link } from 'react-router-dom';
+import { Routes, Link, Route, useNavigate } from 'react-router-dom';
 import './main.css';
+import CitSor from './species/citsor';
+import EngMor from './species/engmor';
+import ParCal from './species/parcal';
+import ScoJap from './species/scojap';
+import ThuAla from './species/thuala';
+import XipGla from './species/xipgla';
 
 // Define the Predict component
 function Predict() {
+  const navigate = useNavigate(); // Get the navigate function from react-router-dom
+
   return (
     <div className="page-container">
-      {/* Add a link to the homepage */}
-      <nav>
-          <ul>
-            <li><Link to="/" className="nav-link">Home</Link></li>
-          </ul>
-        </nav>
-
       <h1 align="center">Select Species</h1>
+      <nav>
+        <ul>
+          {/* Add a back link to the homepage */}
+          <li><Link to="/" className="nav-link">Back to Home</Link></li>
+        </ul>
+      </nav>
       <div className="button">
         <div className="button-container">
           <Link to="/cit_sor" className="grey-button">Pacific Sanddab (Citharichthys sordidus)</Link>
@@ -30,10 +37,14 @@ function Predict() {
         </div>
       </div>
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cit_sor" element={<Predict />} />
-          <Route path="/dedication" element={<Dedication />} />
-        </Routes>
+        <Route path="/cit_sor" element={<CitSor />} />
+        <Route path="/eng_mor" element={<EngMor />} />
+        <Route path="/par_cal" element={<ParCal />} />
+        <Route path="/sco_jap" element={<ScoJap />} />
+        <Route path="/thu_ala" element={<ThuAla />} />
+        <Route path="/xip_gla" element={<XipGla />} />
+        {/* Add routes for other species if needed */}
+      </Routes>
       <footer>
         <div className="footer-content">
           <p>&copy; 2024 Madeline Smith. All rights reserved.</p>
@@ -45,6 +56,3 @@ function Predict() {
 
 // Export the Predict component
 export default Predict;
-
-
-

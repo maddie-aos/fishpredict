@@ -126,3 +126,13 @@ ul {
 .nav-link:hover:after {
   width: 100%;
 }
+
+.image-container {
+  text-align: center;
+  margin-top: 20px; /* Adjust the margin-top as needed */
+}
+
+.image-container img {
+  max-width: 50%;
+  height: auto;
+}
