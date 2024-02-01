@@ -49,7 +49,7 @@ def index():
     return render_template('index.html')
 
 @app.route("/predict")
-def present():
+def predict():
     return render_template("predict.html")
 
 @app.route("/dedication")
