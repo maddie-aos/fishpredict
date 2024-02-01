@@ -16,12 +16,7 @@ function Predict() {
   return (
     <div className="page-container">
       <h1 align="center">Select Species</h1>
-      <nav>
-        <ul>
-          {/* Add a back link to the homepage */}
-          <li><Link to="/" className="nav-link">Back to Home</Link></li>
-        </ul>
-      </nav>
+      
       <div className="button">
         <div className="button-container">
           <Link to="/cit_sor" className="grey-button">Pacific Sanddab (Citharichthys sordidus)</Link>
@@ -34,6 +29,16 @@ function Predict() {
           <Link to="/sco_jap" className="grey-button">Chub Mackerel (Scomber japonicus)</Link>
           <Link to="/thu_ala" className="grey-button">Albacore Tuna (Thunnus alalunga)</Link>
           <Link to="/xip_gla" className="grey-button">Pacific Swordfish (Xiphias gladius)</Link>
+        </div>
+      </div>
+      <div className="button">
+        <div className="button-container">
+        <nav>
+        <ul>
+        <li><Link to="/" className="grey-button">Back to Home</Link></li>
+        </ul>
+      </nav>
+        
         </div>
       </div>
       <Routes>

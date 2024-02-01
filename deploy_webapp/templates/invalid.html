@@ -11,11 +11,13 @@
     <h1 align = "center">Invalid Entry!<h1/>
         <div class="button" style="display: block; margin-bottom: 0; margin-right: 20px;">
             <div style="display: flex; justify-content: center; align-items: left; padding-top: 10px;">
-              <a href=><button class=grey>Make New Prediction</button></a>
+              <a href="{{ url_for('predict') }}">
+                <button class=grey>Make New Prediction</button>
+            </a>
             </div>
         </div>
         <footer>
-            <p>&copy; 2023 Madeline Smith. All rights reserved.</p>
+            <p>&copy; 2024 Madeline Smith. All rights reserved.</p>
           </footer>
 </body>
 </html>
