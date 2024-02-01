@@ -13,6 +13,7 @@ from osgeo import gdal
 import os
 import folium
 import pickle
+from flask import jsonify
 STATIC_DIR = os.path.abspath('./static_files')
 
 #instantiating app 
@@ -24,22 +25,22 @@ eval_pres = pd.read_csv('results/DNN_performance/DNN_eval.txt', sep='\t', header
 #globally loading models for the sake of effiency 
 #loading keras models: present
 
-with open('deploy_webapp/saved_models/Citharichthys_sordidus.pkl', 'rb') as file:
+with open('saved_models/Citharichthys_sordidus.pkl', 'rb') as file:
     cit_sor_model = pickle.load(file)
 
-with open('deploy_webapp/saved_models/Engraulis_mordax.pkl', 'rb') as file:
+with open('saved_models/Engraulis_mordax.pkl', 'rb') as file:
     eng_mor_model = pickle.load(file)
 
-with open('deploy_webapp/saved_models/Paralichthys_californicus.pkl', 'rb') as file:
+with open('saved_models/Paralichthys_californicus.pkl', 'rb') as file:
     par_cal_model = pickle.load(file)
 
-with open('deploy_webapp/saved_models/Scomber_japonicus.pkl', 'rb') as file:
+with open('saved_models/Scomber_japonicus.pkl', 'rb') as file:
     sco_jap_model = pickle.load(file)
 
-with open('deploy_webapp/saved_models/Thunnus_alalunga.pkl', 'rb') as file:
+with open('saved_models/Thunnus_alalunga.pkl', 'rb') as file:
     thu_ala_model = pickle.load(file)
 
-with open('deploy_webapp/saved_models/Xiphias_gladius.pkl', 'rb') as file:
+with open('saved_models/Xiphias_gladius.pkl', 'rb') as file:
     xip_gla_model = pickle.load(file)
 
 

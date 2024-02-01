@@ -1,0 +1,115 @@
+
+Predict CSOR working logic
+
+
+@app.route("/cit_sor")
+def cit_sor_pred():
+    return render_template("cit_sor_pred.html")
+
+@app.route("/cit_sor_pred", methods = ['POST'])
+def predict_csor():
+    #taking in user input, making a dataframe
+    lat = request.form.get('latitudechange')
+    latitude = float(lat)
+    lon = request.form.get('longitudechange')
+    longitude = float(lon)
+    items = {"deci_lat": [latitude], "deci_lon": [longitude]}
+    df = pd.DataFrame(items)
+
+    df = df[ (df['deci_lat']< 90.) & (df['deci_lat'] > -90.)]
+    df = df[ (df['deci_lon']< 180.) & (df['deci_lon'] > -180.) ]
+
+    if not df.empty:
+        inRas=gdal.Open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif')
+        myarray=inRas.ReadAsArray()
+
+        len_pd=np.arange(len(df))
+        lon=df["deci_lon"]
+        lat=df["deci_lat"]
+        lon=lon.values
+        lat=lat.values
+
+        row=[]
+        col=[]
+
+        src=rasterio.open('deploy_webapp/stacked_bio_oracle/bio_oracle_stacked.tif', crs= 'espg: 4326')
+        
+        for i in len_pd:
+            row_n, col_n = src.index(lon[i], lat[i])# spatial --> image coordinates
+            row.append(row_n)
+            col.append(col_n)
+        
+        mean_std=pd.read_csv('deploy_webapp/stacked_bio_oracle/env_bio_mean_std.txt',sep="\t")
+        mean_std=mean_std.to_numpy()
+        
+        X=[]
+        for j in range(0,9):
+            print(j)
+            band=myarray[j]
+            x=[]
+            
+            for i in range(0,len(row)):
+                value= band[row[i],col[i]]
+                if value <-1000:
+                    value=np.nan
+                    x.append(value)
+                else:
+                    value = ((value - mean_std.item((j,1))) / mean_std.item((j,2))) # scale values
+                    x.append(value)
+            X.append(x)
+        
+        X.append(row)
+        X.append(col)
+        
+        X =np.array([np.array(xi) for xi in X])
+        
+        df=pd.DataFrame(X)
+        df=df.T
+        
+        df=df.dropna(axis=0, how='any')
+
+        if not df.empty:
+            input_X=df.loc[:,0:8]
+            row=df[9]
+            col=df[10]
+            
+            row_col=pd.DataFrame({"row":row,"col":col})
+            
+            input_X=input_X.values
+            
+            row=row.values
+            col=col.values
+            
+            prediction_array=np.save('deploy_webapp/predictions/csor_prediction_array.npy',input_X)
+            prediction_pandas=row_col.to_csv('deploy_webapp/predictions/csor_prediction_row_col.csv')
+            
+            input_X=np.load('deploy_webapp/predictions/csor_prediction_array.npy')
+            df=pd.DataFrame(input_X)
+            
+            new_band=myarray[1].copy()
+            new_band.shape
+            
+            new_values = cit_sor_model.predict(x=input_X,verbose=0) ###predict output value
+            new_band_values=[]
+            
+            for i in new_values:
+                new_value=i[1]
+                new_band_values.append(new_value)
+            new_band_values=np.array(new_band_values)
+            resultdf = pd.DataFrame(new_band_values, columns=['predicted_result'])
+            val = resultdf['predicted_result'].values[0]   
+            val = val*100
+            vals = str(val)
+
+            result = "Likeliood of presence: " + vals + "%"
+
+            map = folium.Map(location=[latitude, longitude],zoom_start=8, tooltip = 'This tooltip will appear on hover')
+            folium.Marker(location=[latitude,longitude], tooltip=result).add_to(map)
+            map.save(outfile='deploy_webapp/templates/csor_map.html')
+            return render_template('csor_map.html')
+            #return map._repr_html_()
+
+        else: 
+            return render_template('land_coord.html')
+    else:
+        return render_template('invalid.html')
