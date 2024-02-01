@@ -280,9 +280,9 @@ def predict_emor():
 
 
         else: 
-            return render_template('land_coord.html')
+            return render_template('emor_land_coord.html')
     else:
-        return render_template('invalid.html')
+        return render_template('emor_invalid.html')
 
 @app.route("/par_cal")
 def par_cal_pred():
@@ -392,9 +392,9 @@ def predict_pcal():
 
             #return map._repr_html_()
         else: 
-            return render_template('land_coord.html')
+            return render_template('pcal_land_coord.html')
     else:
-        return render_template('invalid.html')
+        return render_template('pcal_invalid.html')
 
 @app.route("/sco_jap")
 def sco_jap_pred():
@@ -506,9 +506,9 @@ def predict_sjap():
             #return map._repr_html_()
 
         else: 
-            return render_template('land_coord.html')
+            return render_template('sjap_land_coord.html')
     else:
-        return render_template('invalid.html')
+        return render_template('sjap_invalid.html')
     
 @app.route("/thu_ala")
 def thu_ala_pred():
@@ -620,9 +620,9 @@ def predict_tala():
             #return map._repr_html_()
 
         else: 
-            return render_template('land_coord.html')
+            return render_template('tala_land_coord.html')
     else:
-        return render_template('invalid.html')
+        return render_template('tala_invalid.html')
     
 @app.route("/xip_gla")
 def xip_gla_pred():
@@ -733,9 +733,9 @@ def predict_xgla():
             #return map._repr_html_()
 
         else: 
-            return render_template('land_coord.html')
+            return render_template('xgla_land_coord.html')
     else:
-        return render_template('invalid.html')
+        return render_template('xgla_invalid.html')
 
 
 
